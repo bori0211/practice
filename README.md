@@ -1,4 +1,4 @@
-# bori0211 practice (한글)
+# bori0211 practice
 
 # js-basic
 1. https://bori0211.github.io/practice/js-basic/vanilla-modal/
