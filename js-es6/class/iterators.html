@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Iterators</h1>
+
+    <script>
+
+        let array = [1, 2, 3];
+        console.log(typeof array[Symbol.iterator]);
+
+        let it = array[Symbol.iterator]();
+        console.log(it);
+
+        console.log(it.next());
+        console.log(it.next());
+        console.log(it.next());
+        console.log(it.next());
+
+
+
+        let array2 = [4, 5, 6];
+        array2[Symbol.iterator] = function () {
+            let nextValue = 10;
+            return {
+                next: function () {
+                    nextValue++;
+                    return {
+                        done: nextValue > 15 ? true : false,
+                        value: nextValue
+                    };
+                }
+            };
+        }
+
+        let it2 = array2[Symbol.iterator]();
+
+        for (let el of array2) {
+            console.log(el);
+        }
+
+
+
+        let person = {
+            name: "Max",
+            hobbies: ["Cooking", "Sports"],
+            [Symbol.iterator]: function () {
+                let i = 0;
+                let hobbies = this.hobbies;
+                return {
+                    next: function () {
+                        let value = hobbies[i];
+                        i++;
+                        return {
+                            done: i > hobbies.length ? true : false,
+                            value: value
+                        };
+                    }
+                };
+            }
+        };
+
+        for (let hobby of person) {
+            console.log(hobby);
+        }
+
+
+    </script>
+
+</body>
+
+</html>

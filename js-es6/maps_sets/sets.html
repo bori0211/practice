@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h1>Sets</h1>
+  
+<script>
+let set = new Set([1, 1, 1]);
+console.log(set.has(1));
+
+set.add(2);
+set.add(2);
+set.add(3);
+console.log(set);
+
+set.delete(2);
+console.log(set);
+
+for (el of set) { console.log(el); }
+
+for (entry of set.entries()) { console.log(entry); }
+
+set.clear();
+console.log(set);
+
+</script>
+
+  
+</body>
+</html>

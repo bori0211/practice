@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h1>Rest Operator</h1>
+  
+<script>
+let numbers = [1, 2, 3, 4, 5];
+
+function sumUp(toAdd) {
+  let result = 0;
+  for (let i = 0; i < toAdd.length; i++) {
+    result += toAdd[i];
+  }
+  /*
+  console.log(...toAdd);
+  let [a, b, ...c] = toAdd;
+  console.log(a, b, c);
+  */
+  return result;
+}
+
+console.log(sumUp(numbers));
+
+
+function sumUp2(...toAdd) {
+  console.log(toAdd);
+  let result = 0;
+  for (let i = 0; i < toAdd.length; i++) {
+    result += toAdd[i];
+  }
+  return result;
+}
+
+console.log(sumUp2(10, 20, "30"));
+
+
+
+// Spread
+console.log(Math.max(1, 2, 3, 4, 5));
+console.log(Math.max(numbers));
+console.log(Math.max(...numbers));
+
+
+
+</script>
+  
+</body>
+</html>

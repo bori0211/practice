@@ -1,0 +1,8 @@
+name: prompter_sg
+version: 0.0.1
+description: CLI
+author: Seok-tae Kim <bori0211@gmail.com>
+homepage: https://www.datafirst.co.kr
+
+environment:
+  sdk: "<3.0.0"

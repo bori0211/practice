@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Class - Basic</h1>
+
+    <script>
+        const personObj = {
+            name: "Max",
+            greet: function () {
+                console.log("Hello");
+            },
+            greet2() {
+                console.log("Hello 2");
+            }
+        }
+        console.log(personObj);
+        console.log(personObj.__proto__ === Object.prototype);
+
+
+
+        class Person {
+            constructor(name) {
+                this.name = name;
+            }
+
+            greet() {
+                console.log("Hello, my name is " + this.name);
+            }
+        }
+
+        let person = new Person("Max");
+        console.log(person);
+        // person.greet();
+        console.log(person.__proto__ === Person.prototype);
+
+
+
+        class Max extends Person {
+            constructor(age) {
+                super("Max");
+                this.age = age;
+            }
+
+            greet2() {
+                super.greet();
+                this.greet();
+                console.log("Hello, my name is " + this.name + " and I am " + this.age);
+            }
+        }
+
+        let person2 = new Max(27);
+        console.log(person2);
+        person2.greet2();
+        console.log(person2.__proto__ === Max.prototype);
+
+
+
+
+
+
+        class Helper {
+            logTwice(message) {
+                console.log(message);
+                console.log(message);
+            }
+
+            static logTwice2(message) {
+                console.log(message);
+                console.log(message);
+            }
+        }
+
+        let person3 = new Helper();
+        person3.logTwice("Logged!");
+        Helper.logTwice2("Log2!!");
+
+    </script>
+
+</body>
+
+</html>

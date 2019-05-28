@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Arrow</h1>
+
+    <button>Test </button>
+    <script>
+
+        var button = document.querySelector("button");
+
+        function fn() {
+            console.log(this);
+        }
+        //fn();
+
+        var fn2 = () => console.log(this);
+        //fn2();
+
+        //button.addEventListener("click", fn);
+        button.addEventListener("click", fn2);
+
+    </script>
+
+</body>
+
+</html>

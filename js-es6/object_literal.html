@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h1>Object Literal</h1>
+  
+<script>
+let name = "Anna";
+let age = 25;
+
+let ageField = "age";
+
+let obj = {
+  name: "Max",
+  /*age,*/
+  [ageField]: 80,
+  /*
+  greet: function () {
+    console.log("Hello " + this.name + ", " + this.age);
+  },
+  */
+  greet() {
+    console.log("Hello " + this.name + ", " + this.age);
+  },
+  "greet2" () {
+    console.log("Hello2 " + this.name + ", " + this.age);
+  }
+}
+
+console.log(obj);
+obj.greet();
+obj["greet2"]();
+console.log(obj["name"]);
+console.log(obj.age);
+console.log(obj[ageField]);
+
+</script>
+  
+</body>
+</html>

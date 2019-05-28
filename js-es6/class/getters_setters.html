@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Class - Getters & Setters</h1>
+
+    <script>
+        class Person {
+            constructor(name) {
+                this._name = name;
+            }
+
+            get name() {
+                return this._name.toUpperCase() + " is getting";
+            }
+
+            set name(value) {
+                if (value.length > 2) {
+                    this._name = value;
+                } else {
+                    console.log("Rejected!");
+                }
+            }
+        }
+
+        let person = new Person("Max");
+        console.log(person.name); //get name()
+        console.log(person._name);
+
+        person.name = "Ma";
+        console.log(person);
+
+        person.name = "Anna";
+        console.log(person);
+
+
+    </script>
+
+</body>
+
+</html>

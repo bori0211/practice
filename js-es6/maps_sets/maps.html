@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h1>Maps</h1>
+  
+<script>
+let cardAce = {
+  name: "Ace of Spades"
+};
+
+let cardKing = {
+  name: "King of Clubs"
+};
+
+
+//let deck = new Map([["as", cardAce], ["kc", cardKing]]);
+let deck = new Map();
+
+deck.set("as", cardAce);
+deck.set("kc", cardKing);
+console.log(deck);
+
+deck.set("as", cardAce); // 중복 등록 안됨
+console.log(deck);
+
+// 하나만
+console.log(deck.get("as"));
+
+// key로
+for (key of deck.keys()) { console.log(key); }
+// value로
+for (value of deck.values()) { console.log(value); }
+// entry fh
+for (entry of deck.entries()) { console.log(entry); }
+
+
+deck.clear();
+console.log(deck);
+</script>
+
+  
+</body>
+</html>

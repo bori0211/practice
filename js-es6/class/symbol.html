@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  
+  <h1>Symbol</h1>
+  
+<script>
+
+let symbol = Symbol("debug");
+
+let obj = {
+  name: "max",
+  [symbol]: 22
+}
+
+console.log(obj);
+console.log(obj[symbol]);
+
+
+
+// share
+let symbol1 = Symbol.for("age");
+let symbol2 = Symbol.for("age");
+console.log(symbol1 == symbol2);
+
+let person = {
+  name: "Max"
+};
+
+function makeAge(person) {
+  person[symbol2] = 27;
+}
+
+makeAge(person)
+
+console.log(person[symbol1]);
+
+
+
+// well-known symbols (Google 검색)
+let numbers = [1, 2, 3];
+
+console.log(numbers + 1);
+
+numbers[Symbol.toPrimitive] = function() {
+  return 999;
+}
+
+console.log(numbers + 1);
+
+
+</script>
+  
+</body>
+</html>
