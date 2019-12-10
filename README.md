@@ -10,6 +10,8 @@
 
 # js-basic
 1. https://bori0211.github.io/practice/js-basic/vanilla-modal/index.html
+2. https://bori0211.github.io/practice/js-basic/create-dom-modal/made_dom.html
+3. https://bori0211.github.io/practice/js-basic/create-dom-modal/create_dom.html
 
 # js-es6
 1. https://bori0211.github.io/practice/js-es6/arrow.html
