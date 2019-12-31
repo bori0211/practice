@@ -3,11 +3,6 @@
 # flutter web
 1. https://bori0211.github.io/practice/flutter-web/pawan2/build/
 
-# vue
-1. https://bori0211.github.io/practice/vue-project-1/
-1. https://bori0211.github.io/practice/vue-project-2/
-1. https://bori0211.github.io/practice/vue-project-3/
-
 # js-basic
 1. https://bori0211.github.io/practice/js-basic/vanilla-modal/index.html
 2. https://bori0211.github.io/practice/js-basic/create-dom-modal/made_dom.html
