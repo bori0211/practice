@@ -1,8 +1,5 @@
 # bori0211 practice (2019-05-28 reset)
 
-# flutter web
-1. https://bori0211.github.io/practice/flutter-web/pawan2/build/
-
 # js-basic
 1. https://bori0211.github.io/practice/js-basic/vanilla-modal/index.html
 2. https://bori0211.github.io/practice/js-basic/create-dom-modal/made_dom.html
@@ -24,3 +21,6 @@
 1. https://bori0211.github.io/practice/js-es6/maps_sets/sets.html
 
 1. https://bori0211.github.io/practice/js-es6/module/index.html
+
+# flutter web
+1. https://bori0211.github.io/practice/flutter-web/pawan2/build/
