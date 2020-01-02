@@ -1,4 +1,4 @@
-# bori0211 practice (2019-05-28 reset)
+# bori0211 practice (2020-01-02 reset)
 
 # js-basic
 1. https://bori0211.github.io/practice/js-basic/vanilla-modal/index.html
