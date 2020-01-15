@@ -29,8 +29,7 @@ class MySplash extends StatelessWidget {
         '/auth': (BuildContext context) => AuthPage(),
       },
       onGenerateRoute: (RouteSettings settings) {
-        final List<String> pathElements =
-            settings.name.split('/'); // '/detail/1'
+        final List<String> pathElements = settings.name.split('/'); // '/detail/1'
         if (pathElements[0] != '') {
           return null;
         }
@@ -43,8 +42,7 @@ class MySplash extends StatelessWidget {
         if (pathElements[1] == 'detail') {
           //print('detail:' + pathElements[2]);
           return MaterialPageRoute<bool>(
-            builder: (BuildContext context) =>
-                DetailPage(int.parse(pathElements[2])),
+            builder: (BuildContext context) => DetailPage(int.parse(pathElements[2])),
           );
         }
         if (pathElements[1] == 'new') {
@@ -55,8 +53,7 @@ class MySplash extends StatelessWidget {
         if (pathElements[1] == 'modify') {
           print('modify:' + pathElements[2]);
           return MaterialPageRoute<bool>(
-            builder: (BuildContext context) =>
-                FormPage('modify', int.parse(pathElements[2])),
+            builder: (BuildContext context) => FormPage('modify', int.parse(pathElements[2])),
           );
         }
         return null;
@@ -81,8 +78,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     //Timer(Duration(seconds: 5), () => print('Splash Done'));
-    Timer(Duration(seconds: 5),
-        () => Navigator.pushReplacementNamed(context, '/auth'));
+    Timer(Duration(seconds: 5), () => Navigator.pushReplacementNamed(context, '/auth'));
 
     super.initState();
   }
@@ -241,8 +237,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: OrientationBuilder(
-          builder: (BuildContext context, Orientation orientation) {
+      body: OrientationBuilder(builder: (BuildContext context, Orientation orientation) {
         print('orientation: $orientation');
         return Center(
           child: Column(
@@ -251,9 +246,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
               Text(
                 'You have pushed the button this many times:',
                 style: TextStyle(
-                  color: orientation == Orientation.portrait
-                      ? Colors.blue
-                      : Colors.red,
+                  color: orientation == Orientation.portrait ? Colors.blue : Colors.red,
                 ),
               ),
               Text(
@@ -275,7 +268,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     print('state = ${state.toString()}');
-    switch (state) {
+    /*switch (state) {
       case AppLifecycleState.inactive:
         print('*** inactive ***');
         break;
@@ -288,7 +281,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
       case AppLifecycleState.suspending:
         print('*** suspending ***');
         break;
-    }
+    }*/
     super.didChangeAppLifecycleState(state);
   }
 }
