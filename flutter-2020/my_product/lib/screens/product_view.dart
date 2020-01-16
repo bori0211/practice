@@ -87,9 +87,12 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
                 textColor: Colors.black,
                 onPressed: () async {
                   print('승인');
-                  Navigator.pop(context); // alert 닫힘
+                  //Navigator.pop(context); // alert 닫힘
                   // 데이터 삭제 후 리스트로 돌아감
-                  if (await _deleteProduct()) Navigator.pop(context, true); // 리스트로
+                  if (await _deleteProduct()) {
+                    //Navigator.pop(context, true); // 리스트로
+                    Navigator.pushReplacementNamed(context, "/product"); // (새로 고침)
+                  }
                 },
               ),
             ],
@@ -108,6 +111,7 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
   Future<bool> _deleteProduct() async {
     try {
       //print(json.encode(_formData));
+      //print('https://express.datafirst.co.kr/restful/products/${widget.selectedId}');
       final http.Response response = await http.delete(
         'https://express.datafirst.co.kr/restful/products/${widget.selectedId}',
       );

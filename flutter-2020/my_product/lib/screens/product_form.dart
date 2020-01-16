@@ -143,7 +143,8 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
 
     if (widget.act == 'new') {
       if (await _postProduct()) {
-        Navigator.pop(context, true); // 리스트로
+        //Navigator.pop(context, true); // 리스트로
+        Navigator.pushReplacementNamed(context, "/product"); // (새로 고침)
       } else {
         print('오류 안내');
       }
@@ -151,7 +152,8 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
 
     if (widget.act == 'modify') {
       if (await _putProduct()) {
-        Navigator.pop(context, true); // 리스트로
+        //Navigator.pop(context, true); // 리스트로
+        Navigator.pushReplacementNamed(context, "/product"); // (새로 고침)
       } else {
         print('오류 안내');
       }
