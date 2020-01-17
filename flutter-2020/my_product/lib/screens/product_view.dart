@@ -1,10 +1,10 @@
-import 'dart:async';
-import 'dart:convert';
+import "dart:async";
+import "dart:convert";
 
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import "package:flutter/material.dart";
+import "package:http/http.dart" as http;
 
-import '../models/product.dart';
+import "../models/product.dart";
 
 class ProductViewScreen extends StatefulWidget {
   final int selectedId;
@@ -18,27 +18,30 @@ class ProductViewScreen extends StatefulWidget {
 }
 
 class _ProductViewScreenState extends State<ProductViewScreen> {
-  @override
-  void initState() {
-    //print('_ProductViewScreenState: ${widget.selectedId}');
-    super.initState();
+  Future<Product> _getProduct() async {
+    var data = await http.get("https://express.datafirst.co.kr/restful/products/${widget.selectedId}");
+    var row = json.decode(data.body);
+    Product product = Product(
+      row["id"],
+      row["title"],
+      row["description"],
+      row["imageUrl"],
+      double.parse(row["price"]),
+    );
+    //print(product.title);
+    return product;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detail Name"),
+        title: Text("VIEW"),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.edit),
             onPressed: () {
               Navigator.pushNamed<bool>(context, "/product/modify/${widget.selectedId}");
-              /*Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return FormPage('1');
-                }),
-              );*/
             },
           ),
           IconButton(
@@ -68,56 +71,42 @@ class _ProductViewScreenState extends State<ProductViewScreen> {
 
   _showDeleteDialog(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('정말 삭제하시겠습니까?'),
-            content: Text('삭제하면 되돌릴 수 없습니다.'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('취소'),
-                textColor: Colors.grey,
-                onPressed: () {
-                  print('취소함');
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton(
-                child: Text('삭제'),
-                textColor: Colors.black,
-                onPressed: () async {
-                  print('승인');
-                  //Navigator.pop(context); // alert 닫힘
-                  // 데이터 삭제 후 리스트로 돌아감
-                  if (await _deleteProduct()) {
-                    //Navigator.pop(context, true); // 리스트로
-                    Navigator.pushReplacementNamed(context, "/product"); // (새로 고침)
-                  }
-                },
-              ),
-            ],
-          );
-        });
-  }
-
-  Future<Product> _getProduct() async {
-    var data = await http.get('https://express.datafirst.co.kr/restful/products/${widget.selectedId}');
-    var row = json.decode(data.body);
-    Product product = Product(row['id'], row['title'], row['description'], row['imageUrl'], double.parse(row['price']));
-    print(product.title);
-    return product;
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("정말 삭제하시겠습니까?"),
+          content: Text("삭제하면 되돌릴 수 없습니다."),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("취소"),
+              textColor: Colors.grey,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            FlatButton(
+              child: Text("삭제"),
+              textColor: Colors.red,
+              onPressed: () async {
+                // 데이터 삭제 후 리스트로 돌아감
+                if (await _deleteProduct()) {
+                  Navigator.pushReplacementNamed(context, "/product");
+                }
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<bool> _deleteProduct() async {
     try {
-      //print(json.encode(_formData));
-      //print('https://express.datafirst.co.kr/restful/products/${widget.selectedId}');
       final http.Response response = await http.delete(
-        'https://express.datafirst.co.kr/restful/products/${widget.selectedId}',
+        "https://express.datafirst.co.kr/restful/products/${widget.selectedId}",
       );
-      if (response.statusCode != 200 && response.statusCode != 201) return false;
-      // 여기에서 State에 저장
-      return true;
+      var responseBody = json.decode(response.body);
+      return responseBody["result"];
     } catch (error) {
       return false;
     }

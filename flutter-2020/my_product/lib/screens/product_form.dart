@@ -1,8 +1,8 @@
-import 'dart:async';
-import 'dart:convert';
+import "dart:async";
+import "dart:convert";
 
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import "package:flutter/material.dart";
+import "package:http/http.dart" as http;
 
 class ProductFormScreen extends StatefulWidget {
   final String act;
@@ -17,119 +17,94 @@ class ProductFormScreen extends StatefulWidget {
 }
 
 class _ProductFormScreenState extends State<ProductFormScreen> {
-  final Map<String, dynamic> _formData = {'status': null, 'title': null, 'description': null, 'imageUrl': null, 'price': 0.0};
+  final Map<String, dynamic> _formData = {"status": null, "title": null, "description": null, "imageUrl": null, "price": 0.0};
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  @override
-  void initState() {
-    print('_FormPageState: ${widget.selectedId}');
-    super.initState();
-  }
+  Future<Map<String, dynamic>> _getInitProduct() async {
+    if (widget.act == "new") {
+      _formData["status"] = "대기중";
+      _formData["title"] = "";
+      _formData["description"] = "";
+      _formData["imageUrl"] = "";
+      _formData["price"] = 0.0;
+    }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: Icon(Icons.close),
-              onPressed: () {
-                // 닫기 버튼 클릭 (저장하지 않고 그냥 닫음)
-                Navigator.pop(context);
-              },
-            );
-          },
-        ),
-        /*title: Text('폼 (등록/수정)'),*/
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.save),
-            onPressed: () {
-              print('save');
-              _submitForm(context);
-            },
-          ),
-        ],
-      ),
-      body: Container(
-        child: FutureBuilder(
-          future: _getInitProduct(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return Center(
-                child: Text('Loading...'),
-              );
-            } else {
-              return Container(
-                margin: EdgeInsets.all(10.0),
-                child: Form(
-                  key: _formKey,
-                  child: ListView(
-                    children: <Widget>[
-                      _buildTitleTextField(snapshot.data['title']),
-                      SizedBox(height: 10.0),
-                      _buildDescriptionTextField(snapshot.data['description']),
-                      SizedBox(height: 10.0),
-                      _buildPriceTextField(snapshot.data['price']),
-                      SizedBox(height: 10.0),
-                    ],
-                  ),
-                ),
-              );
-            }
-          },
-        ),
-      ),
-    );
+    if (widget.act == "modify") {
+      final http.Response response = await http.get("https://express.datafirst.co.kr/restful/products/${widget.selectedId}");
+      var row = json.decode(response.body);
+      _formData["status"] = row["status"];
+      _formData["title"] = row["title"];
+      _formData["description"] = row["description"];
+      _formData["imageUrl"] = row["imageUrl"];
+      _formData["price"] = double.parse(row["price"]);
+    }
+
+    return _formData;
   }
 
   Widget _buildTitleTextField(String value) {
     return TextFormField(
-      decoration: InputDecoration(
-        labelText: '제품명',
-        border: OutlineInputBorder(),
-      ),
       initialValue: value,
-      /*validator: (String value) {
+      decoration: InputDecoration(labelText: "제품명"),
+      textInputAction: TextInputAction.next,
+      validator: (String value) {
         if (value.trim().length == 0) {
-          return '제품명은 필수 입력사항 입니다.';
+          return "제품명은 필수 입력사항 입니다.";
         }
-      },*/
+        return null;
+      },
       onSaved: (String value) {
-        _formData['title'] = value;
+        _formData["title"] = value;
       },
     );
   }
 
   Widget _buildDescriptionTextField(String value) {
     return TextFormField(
-      maxLines: 4,
-      decoration: InputDecoration(
-        labelText: '설명',
-        border: OutlineInputBorder(),
-      ),
       initialValue: value,
+      decoration: InputDecoration(labelText: "설명"),
+      maxLines: 3,
+      keyboardType: TextInputType.multiline,
       onSaved: (String value) {
-        _formData['description'] = value;
+        _formData["description"] = value;
       },
     );
   }
 
   Widget _buildPriceTextField(double value) {
     return TextFormField(
-      decoration: InputDecoration(
-        labelText: '가격',
-        border: OutlineInputBorder(),
-      ),
       initialValue: value.toString(),
-      /*validator: (String value) {
-        if (value.trim().length == 0) {
-          return '가격은 필수 입력사항 입니다.';
+      decoration: InputDecoration(labelText: "가격"),
+      keyboardType: TextInputType.number,
+      validator: (String value) {
+        if (value.isEmpty) {
+          return "가격은 필수 입력사항 입니다.";
         }
-      },*/
+        if (double.tryParse(value) == null) {
+          return "가격은 숫자만 입력할 수 있습니다.";
+        }
+        return null;
+      },
       onSaved: (String value) {
-        _formData['price'] = double.parse(value);
+        _formData["price"] = double.parse(value);
+      },
+    );
+  }
+
+  Widget _buildSaveButton(BuildContext context) {
+    return RaisedButton(
+      color: Theme.of(context).primaryColor,
+      textColor: Colors.white,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Icon(Icons.save),
+          SizedBox(width: 4),
+          Text("Save"),
+        ],
+      ),
+      onPressed: () {
+        _submitForm(context);
       },
     );
   }
@@ -141,59 +116,81 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
 
     _formKey.currentState.save();
 
-    if (widget.act == 'new') {
+    if (widget.act == "new") {
       if (await _postProduct()) {
-        //Navigator.pop(context, true); // 리스트로
         Navigator.pushReplacementNamed(context, "/product"); // (새로 고침)
       } else {
-        print('오류 안내');
+        print("오류 안내");
       }
     }
 
-    if (widget.act == 'modify') {
+    if (widget.act == "modify") {
       if (await _putProduct()) {
-        //Navigator.pop(context, true); // 리스트로
         Navigator.pushReplacementNamed(context, "/product"); // (새로 고침)
       } else {
-        print('오류 안내');
+        print("오류 안내");
       }
     }
   }
 
-  Future<Map<String, dynamic>> _getInitProduct() async {
-    if (widget.act == 'new') {
-      _formData['status'] = '대기중';
-      _formData['title'] = 'Default Title';
-      _formData['description'] = '';
-      _formData['imageUrl'] = '';
-      _formData['price'] = 99.99;
-    }
-
-    if (widget.act == 'modify') {
-      var data = await http.get('https://express.datafirst.co.kr/restful/products/${widget.selectedId}');
-      var row = json.decode(data.body);
-      //_formData = {'title': row['title'], 'description': row['description'], 'imageUrl': row['imageUrl'], 'price': double.parse(row['price'])};
-      _formData['status'] = row['status'];
-      _formData['title'] = row['title'];
-      _formData['description'] = row['description'];
-      _formData['imageUrl'] = row['imageUrl'];
-      _formData['price'] = double.parse(row['price']);
-    }
-
-    return _formData;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: Icon(Icons.close),
+              onPressed: () {
+                Navigator.pop(context); // 닫기 버튼 클릭 (저장하지 않고 그냥 닫음)
+              },
+            );
+          },
+        ),
+        title: Text(widget.act.toUpperCase()),
+      ),
+      body: Container(
+        child: FutureBuilder(
+          future: _getInitProduct(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            if (snapshot.data == null) {
+              return Center(
+                child: Text("Loading..."),
+              );
+            } else {
+              return Container(
+                margin: EdgeInsets.symmetric(horizontal: 8),
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    children: <Widget>[
+                      _buildTitleTextField(snapshot.data["title"]),
+                      SizedBox(height: 8),
+                      _buildDescriptionTextField(snapshot.data["description"]),
+                      SizedBox(height: 8),
+                      _buildPriceTextField(snapshot.data["price"]),
+                      SizedBox(height: 8),
+                      _buildSaveButton(context),
+                    ],
+                  ),
+                ),
+              );
+            }
+          },
+        ),
+      ),
+    );
   }
 
   Future<bool> _postProduct() async {
     try {
-      //print(json.encode(_formData));
       final http.Response response = await http.post(
         'https://express.datafirst.co.kr/restful/products',
         headers: {"Content-Type": "application/json"},
         body: json.encode(_formData),
       );
-      if (response.statusCode != 200 && response.statusCode != 201) return false;
-      // 여기에서 State에 저장
-      return true;
+      var responseBody = json.decode(response.body);
+      return responseBody["result"];
     } catch (error) {
       return false;
     }
@@ -201,15 +198,13 @@ class _ProductFormScreenState extends State<ProductFormScreen> {
 
   Future<bool> _putProduct() async {
     try {
-      //print(json.encode(_formData));
       final http.Response response = await http.put(
         'https://express.datafirst.co.kr/restful/products/${widget.selectedId}',
         headers: {"Content-Type": "application/json"},
         body: json.encode(_formData),
       );
-      if (response.statusCode != 200 && response.statusCode != 201) return false;
-      // 여기에서 State에 저장
-      return true;
+      var responseBody = json.decode(response.body);
+      return responseBody["result"];
     } catch (error) {
       return false;
     }

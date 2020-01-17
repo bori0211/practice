@@ -1,12 +1,32 @@
-import 'dart:convert';
+import "dart:async";
+import "dart:convert";
 
 import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
 
-import "../widgets/main_drawer.dart";
 import "../models/product.dart";
+import "../widgets/main_drawer.dart";
 
 class ProductListScreen extends StatelessWidget {
+  Future<List<Product>> _getProducts() async {
+    var data = await http.get("https://express.datafirst.co.kr/restful/products");
+    var rows = json.decode(data.body);
+    List<Product> products = [];
+    for (var row in rows) {
+      Product product = Product(
+        row["id"],
+        row["title"],
+        row["description"],
+        row["imageUrl"],
+        double.parse(row["price"]),
+      );
+      //print(product);
+      products.add(product);
+    }
+    //print("products length: ${products.length}");
+    return products;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +40,7 @@ class ProductListScreen extends StatelessWidget {
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return Center(
-                child: Text('Loading...'),
+                child: Text("Loading..."),
               );
             } else {
               return ListView.builder(
@@ -28,12 +48,11 @@ class ProductListScreen extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
                     leading: CircleAvatar(
-                      backgroundImage: NetworkImage('https://demo.kidneylife.co.kr/upload/11111111/pat_profile/source/20171215102403_movie_image.jpg'),
+                      backgroundImage: NetworkImage("https://demo.kidneylife.co.kr/upload/11111111/pat_profile/source/20171215102403_movie_image.jpg"),
                     ),
                     title: Text(snapshot.data[index].title),
-                    subtitle: Text('${snapshot.data[index].price}'),
+                    subtitle: Text("${snapshot.data[index].price}"),
                     onTap: () {
-                      //print(111);
                       Navigator.pushNamed<bool>(context, "/product/view/${snapshot.data[index].id}");
                     },
                   );
@@ -51,24 +70,5 @@ class ProductListScreen extends StatelessWidget {
         child: Icon(Icons.add),
       ),
     );
-  }
-
-  Future<List<Product>> _getProducts() async {
-    var data = await http.get("https://express.datafirst.co.kr/restful/products");
-    var rows = json.decode(data.body);
-    List<Product> products = [];
-    for (var row in rows) {
-      Product product = Product(
-        row["id"],
-        row["title"],
-        row["description"],
-        row["imageUrl"],
-        double.parse(row["price"]),
-      );
-      //print(product);
-      products.add(product);
-    }
-    print('products length: ${products.length}');
-    return products;
   }
 }

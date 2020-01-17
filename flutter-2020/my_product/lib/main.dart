@@ -11,9 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: "My Flutter App",
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        accentColor: Colors.amber,
+        /*canvasColor: Color.fromRGBO(255, 254, 224, 1),*/
       ),
       //home: HomeScreen(),
       initialRoute: "/",
@@ -22,8 +24,7 @@ class MyApp extends StatelessWidget {
         "/product": (context) => ProductListScreen(),
       },
       onGenerateRoute: (RouteSettings settings) {
-        final List<String> pathElements = settings.name.split("/"); // '/product/view/1'
-
+        final List<String> pathElements = settings.name.split("/"); // "/product/view/1"
         if (pathElements[0] == "" && pathElements[1] == "product") {
           if (pathElements[2] == "view") {
             //print("view:" + pathElements[3]);
