@@ -32,6 +32,14 @@ class ProductListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("PRODUCT"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.pushNamed<bool>(context, "/product/new");
+            },
+          ),
+        ],
       ),
       drawer: MainDrawer(),
       body: Container(
@@ -61,13 +69,6 @@ class ProductListScreen extends StatelessWidget {
             }
           },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed<bool>(context, "/product/new");
-        },
-        tooltip: "Add",
-        child: Icon(Icons.add),
       ),
     );
   }
