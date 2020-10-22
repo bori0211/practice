@@ -1,0 +1,376 @@
+/*@import "~bootstrap/scss/bootstrap";*/
+
+$selected-color: #cc181e;
+$boundary-color: #e8e8e8;
+
+$primary-color: #1976d2;
+$secondary-color: #d2d6de;
+$success-color: #00a65a;
+$danger-color: #dd4b39;
+$warning-color: #f39c12;
+$info-color: #00c0ef;
+$purple-color: #6f42c1;
+$pink-color: #e83e8c;
+
+$bg-body-color: #f1f1f1;
+$bg-menu-hover-color: lightgrey;
+
+$text-body-color: #212529;
+/* Bootstrap 기본 */
+$text-menu-color: #666;
+$text-badge-color: #666;
+$text-muted-color: #aab8c2;
+$text-placeholder-color: #b8b8b8;
+
+$text-icon-color: #b8b8b8;
+$text-icon-hover-color: #666;
+
+
+
+/*********************************************************************************
+ * React                                                                         *
+ ********************************************************************************/
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+/*@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}*/
+
+
+
+/*********************************************************************************
+ * Core: General Layout Style (필수)                                             *
+ ********************************************************************************/
+
+body {
+  background-color: $bg-body-color;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  overflow-y: scroll;
+}
+
+a {
+  color: $text-body-color;
+  transition: all 0.35s;
+
+  &:active,
+  &:hover,
+  &:focus {
+    color: $text-body-color;
+    text-decoration: none;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 0;
+}
+
+button:focus,
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+
+
+/*********************************************************************************
+ * Layout: Navbar                                                                *
+ ********************************************************************************/
+
+.navbar {
+  height: 50px;
+  padding: 0;
+  background-color: white;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  justify-content: center;
+
+  .navbar-nav {
+    flex-direction: row;
+
+    .nav-item>a {
+      font-family: Raleway, Arial, sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      opacity: 0.6;
+      padding: 4px 8px;
+
+      &.selected,
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+
+/*********************************************************************************
+ * Layout: Content                                                               *
+ ********************************************************************************/
+
+.content-main {
+  margin-left: 0;
+  padding-top: 50px;
+
+  .content-wrapper {
+    min-height: 250px;
+    margin: 12px auto 24px;
+    width: 970px;
+
+    .content {
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+      background: #fff;
+      width: 100%;
+
+      .content-header {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 24px;
+
+        h1.content-title {
+          font-size: 1.2em;
+        }
+      }
+
+      .content-body {
+        padding: 12px 9px;
+      }
+
+      .content-footer {
+        padding: 4px 0 16px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+
+/*********************************************************************************
+ * Component: Form                                                               *
+ ********************************************************************************/
+
+.form-inline .form-control,
+.form-inline .input-group.date,
+.form-inline .form-check {
+  width: auto;
+  /* 575이하일 때 100% 되는 것을 방지 */
+}
+
+.col-form-label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.form-control {
+  border-color: #d2d6de;
+  border-radius: 0;
+  padding: 5px;
+  font-size: 12px;
+  line-height: 18px;
+  min-height: 30px;
+
+  &:focus {
+    border-color: $primary-color;
+  }
+}
+
+input.form-control,
+select.form-control {
+  height: 30px;
+}
+
+input[type="file"].form-control {
+  height: 38px;
+}
+
+.form-text {
+  margin: 0;
+  padding: 7px 0;
+}
+
+
+
+/*********************************************************************************
+ * Component: Table                                                              *
+ ********************************************************************************/
+
+.table {
+  background-color: #fff;
+  margin-bottom: 0;
+
+  &.table-striped {
+    tbody {
+      tr:nth-of-type(odd) {
+        background-color: #fff;
+      }
+
+      tr:nth-of-type(even) {
+        background-color: rgba(0, 0, 0, .04);
+      }
+    }
+  }
+
+  &.table-bordered {
+
+    thead,
+    tbody,
+    tfoot {
+      tr {
+
+        th,
+        td {
+          border: 1px solid #ddd;
+        }
+      }
+    }
+  }
+
+  >thead,
+  >tbody,
+  >tfoot {
+    >tr {
+      >th {
+        padding: 8px;
+        vertical-align: middle;
+        font-weight: normal;
+        text-align: center;
+        border-bottom-width: 1px;
+
+        &.bg-grey {
+          background-color: rgba(0, 0, 0, 0.08);
+        }
+      }
+
+      >td {
+        padding: 8px;
+        vertical-align: middle;
+
+        &.bg-grey {
+          background-color: rgba(0, 0, 0, 0.04);
+        }
+      }
+    }
+  }
+
+  >thead {
+    >tr {
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  >tfoot {
+    >tr {
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  >tbody {
+    >tr {
+      >td {}
+    }
+  }
+}
+
+
+
+/*********************************************************************************
+ * Component: Button                                                             *
+ ********************************************************************************/
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: none;
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+
+  &:hover:not([disabled]) {
+    cursor: pointer;
+  }
+
+  &:active {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  }
+
+  &.btn-xs {
+    padding: 4px 6px;
+  }
+
+  &.btn-flat {
+    border-radius: 0;
+  }
+
+  &.btn-default {
+    background-color: #f4f4f4;
+    border-color: #ddd;
+    color: #444;
+
+    &:hover,
+    &:active {
+      background-color: #e7e7e7;
+    }
+  }
+
+  &.btn-primary {
+    background-color: $primary-color;
+    border-color: #0065a0;
+    color: #fff;
+
+    &:hover,
+    &:active {
+      background-color: #0065a0;
+    }
+  }
+}
+
+
+
+/*********************************************************************************
+ * Component: Miscellaneous                                                      *
+ ********************************************************************************/
+
+.bg-primary {
+  background-color: $primary-color !important;
+  color: #fff !important;
+}
+
+[class^="bg-"].disabled {
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+}
+
+.text-primary {
+  color: $primary-color !important;
+}
+
+.text-grey {
+  color: grey !important;
+}
+
+.text-muted {
+  color: $text-muted-color !important;
+}
