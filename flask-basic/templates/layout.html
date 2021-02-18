@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MyFlaskApp</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon-16x16.png') }}" type="image/png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+body {
+  padding-top: 4.6rem;
+}
+    </style>
+  </head>
+  <body>
+    
+    {% include "includes/_navbar.html" %}
+    <div class="container">
+      {% block body %}{% endblock %}
+    </div>
+    
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
