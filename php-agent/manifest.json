@@ -1,0 +1,16 @@
+{
+  "name": "DF agent",
+  "short_name": "DF agent",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/favicon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}

@@ -1,0 +1,479 @@
+/*********************************************************************************
+ * SCSS: Variables                                                               *
+ ********************************************************************************/
+
+$selected-color: #cc181e;
+$boundary-color: #e8e8e8;
+
+$primary-color: #1976d2;
+$secondary-color: #d2d6de;
+$success-color: #00a65a;
+$danger-color: #dd4b39;
+$warning-color: #f39c12;
+$info-color: #00c0ef;
+$purple-color: #6f42c1;
+$pink-color: #e83e8c;
+
+$bg-body-color: #f1f1f1;
+$bg-menu-hover-color: lightgrey;
+
+$text-body-color: #212529; /* Bootstrap 기본 */
+$text-menu-color: #666;
+$text-badge-color: #666;
+$text-muted-color: #aab8c2;
+$text-placeholder-color: #b8b8b8;
+
+$text-icon-color: #b8b8b8;
+$text-icon-hover-color: #666;
+
+
+
+/*********************************************************************************
+ * Core: General Layout Style (필수)                                             *
+ ********************************************************************************/
+
+body {
+  background-color: $bg-body-color;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  overflow-y: scroll;
+}
+
+a {
+  color: $text-body-color;
+  transition: all 0.35s;
+  
+  &:active,
+  &:hover,
+  &:focus {
+    color: $text-body-color;
+    text-decoration: none;
+  }
+}
+
+h1,h2,h3,h4,h5,h6 {
+  margin-bottom: 0;
+}
+
+button:focus,
+.btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+
+
+/*********************************************************************************
+ * Layout: Navbar                                                                *
+ ********************************************************************************/
+
+.navbar {
+  height: 50px;
+  padding: 0;
+  background-color: white;
+  box-shadow: 0 0 3px rgba(0,0,0,0.2);
+  z-index: 1030;
+  justify-content: center;
+  
+  .navbar-logo {
+    .navbar-brand  {
+      font-size: 16px; /* BS 기본 font-size: 1.25rem; 20px 수직 정렬 문제 */
+      /*margin-right: 1rem;*/ /* (0.6rem) IE에서 페이지 로딩 시 움직임 */
+      
+      .logo-img {
+        width: auto;
+        height: 30px;
+      }
+    }
+  }
+  
+  .navbar-custom-menu  {
+    display: flex;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    
+    .login-profile-dropdown {
+      .login-profile-img {
+        width: auto;
+        height: 30px;
+        border-radius: 50%;
+      }
+      
+      .dropdown-menu {
+        box-shadow: 0 0 2px rgba(0,0,0,0.2);
+        
+        .dropdown-body {
+          width: 180px;
+          padding: 10px;
+          text-align: center;
+          
+          .body-img {
+            height: 96px;
+            width: 96px;
+            border: 3px solid;
+            border-color: transparent;
+            border-color: rgba(100, 100, 100, 0.2);
+          }
+        }
+      }
+    }
+    
+  }
+}
+
+
+
+/*********************************************************************************
+ * Layout: Sidebar                                                               *
+ ********************************************************************************/
+
+.sidebar {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  width: 230px;
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0,0,0,0.2);
+  z-index: 1029; /* navbar 아래로 */
+  transform: translate(-232px, 0); /* 그림자 너비까지 */
+  
+  body.sidebar-open & {
+    transform: translate(0, 0);
+  }
+  
+  ul.sidebar-menu {
+    margin: 0;
+    padding: 12px 20px;
+    list-style: none;
+    
+    li.sidebar-menu-item {
+      a {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 5px 12px;
+        color: $text-menu-color;
+        font-size: 13px;
+        
+        &:hover {
+          background-color: $bg-menu-hover-color;
+        }
+      }
+      
+      a.selected {
+        background-color: $selected-color;
+        color: #fff;
+      }
+    }
+    
+    li.divider {
+      width: 100%;
+      margin: 0.5rem 0;
+      border-bottom: 1px solid $boundary-color;
+    }
+  }
+}
+
+
+
+/*********************************************************************************
+ * Layout: Content                                                               *
+ ********************************************************************************/
+
+.content-main {
+  margin-left: 0;
+  padding-top: 50px;
+  min-height: 100vh;
+  
+  .content-wrapper {
+    width: 100%;
+    min-height: 250px;
+    margin: 12px auto 12px;
+  }
+}
+
+
+
+/*********************************************************************************
+ * Component: Form                                                               *
+ ********************************************************************************/
+
+.form-inline .form-control,
+.form-inline .input-group.date,
+.form-inline .form-check {
+  width: auto; /* 575이하일 때 100% 되는 것을 방지 */
+}
+
+.col-form-label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.form-control {
+  border-color: #d2d6de;
+  border-radius: 0;
+  padding: 5px;
+  font-size: 12px;
+  min-height: 30px;
+  
+  &:focus {
+    border-color: $primary-color;
+  }
+}
+
+input.form-control,
+select.form-control {
+  height: 30px;
+}
+
+input[type="file"].form-control {
+  height: 38px;
+}
+
+.form-text {
+  margin: 0;
+  padding: 7px 0;
+}
+
+
+
+/*********************************************************************************
+ * Component: Table                                                              *
+ ********************************************************************************/
+
+.table {
+  background-color: #fff;
+  margin-bottom: 0;
+  
+  >thead {
+    >tr {
+      background-color: rgba(0,0,0,0.08);
+    }
+  }
+  
+  >tfoot {
+    >tr {
+      background-color: rgba(0,0,0,0.08);
+    }
+  }
+  
+  >thead, >tbody, >tfoot {
+    >tr {
+      >th {
+        padding: 8px;
+        vertical-align: middle;
+        font-weight: normal;
+        text-align: center;
+        border-bottom-width: 1px;
+        
+        &.bg-grey {
+          background-color: rgba(0,0,0,0.08);
+        }
+        &.bg-lightgrey {
+          background-color: rgba(0,0,0,0.04);
+        }
+        &.bg-green {
+          background-color: rgba($success-color, 0.1);
+        }
+        &.bg-red {
+          background-color: rgba($danger-color, 0.1);
+        }
+        &.bg-yellow {
+          background-color: rgba($warning-color, 0.1);
+        }
+        &.bg-blue {
+          background-color: rgba($info-color, 0.1);
+        }
+        &.bg-purple {
+          background-color: rgba($purple-color, 0.1);
+        }
+        &.bg-pink {
+          background-color: rgba($pink-color, 0.1);
+        }
+      }
+      
+      >td {
+        padding: 8px;
+        vertical-align: middle;
+        
+        &.bg-grey {
+          background-color: rgba(0,0,0,0.04);
+        }
+        &.bg-lightgrey {
+          background-color: rgba(0,0,0,0.02);
+        }
+        &.bg-green {
+          background-color: rgba($success-color, 0.05);
+        }
+        &.bg-red {
+          background-color: rgba($danger-color, 0.05);
+        }
+        &.bg-yellow {
+          background-color: rgba($warning-color, 0.05);
+        }
+        &.bg-blue {
+          background-color: rgba($info-color, 0.05);
+        }
+        &.bg-purple {
+          background-color: rgba($purple-color, 0.05);
+        }
+        &.bg-pink {
+          background-color: rgba($pink-color, 0.05);
+        }
+      }
+    }
+  }
+  
+  &.table-striped {
+    tbody {
+      tr:nth-of-type(odd) {
+        background-color: #fff;
+      }
+      tr:nth-of-type(even) {
+        background-color: rgba(0,0,0,.04);
+      }
+    }
+  }
+  
+  &.table-bordered {
+    thead, tbody, tfoot {
+      tr {
+        th, td {
+          border: 1px solid #ddd;
+        }
+      }
+    }
+  }
+}
+
+
+
+/*********************************************************************************
+ * Component: Button                                                             *
+ ********************************************************************************/
+
+.btn {
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: none;
+  padding: 5px 10px;
+  font-size: 12px;
+  
+  &:active {
+    box-shadow: inset 0 3px 5px rgba(0,0,0,0.125);
+  }
+  
+  &:hover:not([disabled]) {
+    cursor: pointer;
+  }
+  
+  &.btn-flat {
+    border-radius: 0;
+  }
+  
+  &.btn-xs {
+    padding: 4px 6px;
+  }
+  
+  &.btn-default {
+    background-color: #f4f4f4;
+    border-color: #ddd;
+    color: #444;
+    
+    &:active,
+    &:hover{
+      background-color: #e7e7e7;
+    }
+  }
+  
+  &.btn-primary {
+    background-color: $primary-color;
+    border-color: #1565C0;
+    color: #fff;
+    
+    &:active,
+    &:hover{
+      background-color: #1565C0;
+    }
+  }
+  
+  /* current season */
+  &.btn-blue {
+    background-color: #3e67cf;
+    border-color: darken(#3e67cf, 10%);
+    color: #fff;
+    
+    &:hover,
+    &:active {
+      background-color: darken(#3e67cf, 10%);
+    }
+  }
+  
+}
+
+
+
+/*********************************************************************************
+ * Component: Miscellaneous                                                      *
+ ********************************************************************************/
+
+.bg-primary {
+  background-color: $primary-color !important;
+  color: #fff !important;
+}
+.bg-success {
+  background-color: $success-color !important;
+  color: #fff !important;
+}
+.bg-danger {
+  background-color: $danger-color !important;
+  color: #fff !important;
+}
+.bg-warning {
+  background-color: $warning-color !important;
+  color: #fff !important;
+}
+.bg-info {
+  background-color: $info-color !important;
+  color: #fff !important;
+}
+
+[class^="bg-"].disabled {
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+}
+
+
+.text-primary {
+  color: $primary-color !important;
+}
+.text-success {
+  color: $success-color !important;
+}
+.text-danger {
+  color: $danger-color !important;
+}
+.text-warning {
+  color: $warning-color !important;
+}
+.text-info {
+  color: $info-color !important;
+}
+.text-purple {
+  color: $purple-color !important;
+}
+
+.text-body {
+  color: $text-body-color !important;
+}
+.text-selected {
+  color: $selected-color !important;
+}
+.text-grey {
+  color: grey !important;
+}
+.text-muted {
+  color: $text-muted-color !important;
+}

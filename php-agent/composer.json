@@ -1,0 +1,14 @@
+{
+    "name": "datafirst/agent",
+    "description": "AGENT Project",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Seok-tae Kim",
+            "email": "bori0211@gmail.com"
+        }
+    ],
+    "require": {
+        "influxdata/influxdb-client-php": "^1.8"
+    }
+}

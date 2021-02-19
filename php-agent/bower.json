@@ -1,0 +1,22 @@
+{
+  "name": "home-agent",
+  "description": "AGENT Project",
+  "main": "index.js",
+  "authors": [
+    "Seok-tae Kim <bori0211@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://www.datafirst.co.kr",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "fontawesome": "^5.0.0",
+    "jquery": "^3.0.0"
+  }
+}

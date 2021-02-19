@@ -1,0 +1,385 @@
+@charset "UTF-8";
+/*********************************************************************************
+ * SCSS: Variables                                                               *
+ ********************************************************************************/
+/* Bootstrap 기본 */
+/*********************************************************************************
+ * Core: General Layout Style (필수)                                             *
+ ********************************************************************************/
+body {
+  background-color: #f1f1f1;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  overflow-y: scroll;
+}
+
+a {
+  color: #212529;
+  transition: all 0.35s;
+}
+a:active, a:hover, a:focus {
+  color: #212529;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0;
+}
+
+button:focus,
+.btn:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+/*********************************************************************************
+ * Layout: Navbar                                                                *
+ ********************************************************************************/
+.navbar {
+  height: 50px;
+  padding: 0;
+  background-color: white;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+  z-index: 1030;
+  justify-content: center;
+}
+.navbar .navbar-logo .navbar-brand {
+  font-size: 16px;
+  /* BS 기본 font-size: 1.25rem; 20px 수직 정렬 문제 */
+  /*margin-right: 1rem;*/
+  /* (0.6rem) IE에서 페이지 로딩 시 움직임 */
+}
+.navbar .navbar-logo .navbar-brand .logo-img {
+  width: auto;
+  height: 30px;
+}
+.navbar .navbar-custom-menu {
+  display: flex;
+  margin-left: 0.5rem;
+  margin-right: 1rem;
+}
+.navbar .navbar-custom-menu .login-profile-dropdown .login-profile-img {
+  width: auto;
+  height: 30px;
+  border-radius: 50%;
+}
+.navbar .navbar-custom-menu .login-profile-dropdown .dropdown-menu {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.navbar .navbar-custom-menu .login-profile-dropdown .dropdown-menu .dropdown-body {
+  width: 180px;
+  padding: 10px;
+  text-align: center;
+}
+.navbar .navbar-custom-menu .login-profile-dropdown .dropdown-menu .dropdown-body .body-img {
+  height: 96px;
+  width: 96px;
+  border: 3px solid;
+  border-color: transparent;
+  border-color: rgba(100, 100, 100, 0.2);
+}
+
+/*********************************************************************************
+ * Layout: Sidebar                                                               *
+ ********************************************************************************/
+.sidebar {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  bottom: 0;
+  width: 230px;
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  z-index: 1029;
+  /* navbar 아래로 */
+  transform: translate(-232px, 0);
+  /* 그림자 너비까지 */
+}
+body.sidebar-open .sidebar {
+  transform: translate(0, 0);
+}
+.sidebar ul.sidebar-menu {
+  margin: 0;
+  padding: 12px 20px;
+  list-style: none;
+}
+.sidebar ul.sidebar-menu li.sidebar-menu-item a {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 5px 12px;
+  color: #666;
+  font-size: 13px;
+}
+.sidebar ul.sidebar-menu li.sidebar-menu-item a:hover {
+  background-color: lightgrey;
+}
+.sidebar ul.sidebar-menu li.sidebar-menu-item a.selected {
+  background-color: #cc181e;
+  color: #fff;
+}
+.sidebar ul.sidebar-menu li.divider {
+  width: 100%;
+  margin: 0.5rem 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+/*********************************************************************************
+ * Layout: Content                                                               *
+ ********************************************************************************/
+.content-main {
+  margin-left: 0;
+  padding-top: 50px;
+  min-height: 100vh;
+}
+.content-main .content-wrapper {
+  width: 100%;
+  min-height: 250px;
+  margin: 12px auto 12px;
+}
+
+/*********************************************************************************
+ * Component: Form                                                               *
+ ********************************************************************************/
+.form-inline .form-control,
+.form-inline .input-group.date,
+.form-inline .form-check {
+  width: auto;
+  /* 575이하일 때 100% 되는 것을 방지 */
+}
+
+.col-form-label {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.form-control {
+  border-color: #d2d6de;
+  border-radius: 0;
+  padding: 5px;
+  font-size: 12px;
+  min-height: 30px;
+}
+.form-control:focus {
+  border-color: #1976d2;
+}
+
+input.form-control,
+select.form-control {
+  height: 30px;
+}
+
+input[type=file].form-control {
+  height: 38px;
+}
+
+.form-text {
+  margin: 0;
+  padding: 7px 0;
+}
+
+/*********************************************************************************
+ * Component: Table                                                              *
+ ********************************************************************************/
+.table {
+  background-color: #fff;
+  margin-bottom: 0;
+}
+.table > thead > tr {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.table > tfoot > tr {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th {
+  padding: 8px;
+  vertical-align: middle;
+  font-weight: normal;
+  text-align: center;
+  border-bottom-width: 1px;
+}
+.table > thead > tr > th.bg-grey, .table > tbody > tr > th.bg-grey, .table > tfoot > tr > th.bg-grey {
+  background-color: rgba(0, 0, 0, 0.08);
+}
+.table > thead > tr > th.bg-lightgrey, .table > tbody > tr > th.bg-lightgrey, .table > tfoot > tr > th.bg-lightgrey {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.table > thead > tr > th.bg-green, .table > tbody > tr > th.bg-green, .table > tfoot > tr > th.bg-green {
+  background-color: rgba(0, 166, 90, 0.1);
+}
+.table > thead > tr > th.bg-red, .table > tbody > tr > th.bg-red, .table > tfoot > tr > th.bg-red {
+  background-color: rgba(221, 75, 57, 0.1);
+}
+.table > thead > tr > th.bg-yellow, .table > tbody > tr > th.bg-yellow, .table > tfoot > tr > th.bg-yellow {
+  background-color: rgba(243, 156, 18, 0.1);
+}
+.table > thead > tr > th.bg-blue, .table > tbody > tr > th.bg-blue, .table > tfoot > tr > th.bg-blue {
+  background-color: rgba(0, 192, 239, 0.1);
+}
+.table > thead > tr > th.bg-purple, .table > tbody > tr > th.bg-purple, .table > tfoot > tr > th.bg-purple {
+  background-color: rgba(111, 66, 193, 0.1);
+}
+.table > thead > tr > th.bg-pink, .table > tbody > tr > th.bg-pink, .table > tfoot > tr > th.bg-pink {
+  background-color: rgba(232, 62, 140, 0.1);
+}
+.table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+  padding: 8px;
+  vertical-align: middle;
+}
+.table > thead > tr > td.bg-grey, .table > tbody > tr > td.bg-grey, .table > tfoot > tr > td.bg-grey {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.table > thead > tr > td.bg-lightgrey, .table > tbody > tr > td.bg-lightgrey, .table > tfoot > tr > td.bg-lightgrey {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+.table > thead > tr > td.bg-green, .table > tbody > tr > td.bg-green, .table > tfoot > tr > td.bg-green {
+  background-color: rgba(0, 166, 90, 0.05);
+}
+.table > thead > tr > td.bg-red, .table > tbody > tr > td.bg-red, .table > tfoot > tr > td.bg-red {
+  background-color: rgba(221, 75, 57, 0.05);
+}
+.table > thead > tr > td.bg-yellow, .table > tbody > tr > td.bg-yellow, .table > tfoot > tr > td.bg-yellow {
+  background-color: rgba(243, 156, 18, 0.05);
+}
+.table > thead > tr > td.bg-blue, .table > tbody > tr > td.bg-blue, .table > tfoot > tr > td.bg-blue {
+  background-color: rgba(0, 192, 239, 0.05);
+}
+.table > thead > tr > td.bg-purple, .table > tbody > tr > td.bg-purple, .table > tfoot > tr > td.bg-purple {
+  background-color: rgba(111, 66, 193, 0.05);
+}
+.table > thead > tr > td.bg-pink, .table > tbody > tr > td.bg-pink, .table > tfoot > tr > td.bg-pink {
+  background-color: rgba(232, 62, 140, 0.05);
+}
+.table.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #fff;
+}
+.table.table-striped tbody tr:nth-of-type(even) {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+.table.table-bordered thead tr th, .table.table-bordered thead tr td, .table.table-bordered tbody tr th, .table.table-bordered tbody tr td, .table.table-bordered tfoot tr th, .table.table-bordered tfoot tr td {
+  border: 1px solid #ddd;
+}
+
+/*********************************************************************************
+ * Component: Button                                                             *
+ ********************************************************************************/
+.btn {
+  border: 1px solid transparent;
+  border-radius: 3px;
+  box-shadow: none;
+  padding: 5px 10px;
+  font-size: 12px;
+  /* current season */
+}
+.btn:active {
+  box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+.btn:hover:not([disabled]) {
+  cursor: pointer;
+}
+.btn.btn-flat {
+  border-radius: 0;
+}
+.btn.btn-xs {
+  padding: 4px 6px;
+}
+.btn.btn-default {
+  background-color: #f4f4f4;
+  border-color: #ddd;
+  color: #444;
+}
+.btn.btn-default:active, .btn.btn-default:hover {
+  background-color: #e7e7e7;
+}
+.btn.btn-primary {
+  background-color: #1976d2;
+  border-color: #1565C0;
+  color: #fff;
+}
+.btn.btn-primary:active, .btn.btn-primary:hover {
+  background-color: #1565C0;
+}
+.btn.btn-blue {
+  background-color: #3e67cf;
+  border-color: #2b51af;
+  color: #fff;
+}
+.btn.btn-blue:hover, .btn.btn-blue:active {
+  background-color: #2b51af;
+}
+
+/*********************************************************************************
+ * Component: Miscellaneous                                                      *
+ ********************************************************************************/
+.bg-primary {
+  background-color: #1976d2 !important;
+  color: #fff !important;
+}
+
+.bg-success {
+  background-color: #00a65a !important;
+  color: #fff !important;
+}
+
+.bg-danger {
+  background-color: #dd4b39 !important;
+  color: #fff !important;
+}
+
+.bg-warning {
+  background-color: #f39c12 !important;
+  color: #fff !important;
+}
+
+.bg-info {
+  background-color: #00c0ef !important;
+  color: #fff !important;
+}
+
+[class^=bg-].disabled {
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+}
+
+.text-primary {
+  color: #1976d2 !important;
+}
+
+.text-success {
+  color: #00a65a !important;
+}
+
+.text-danger {
+  color: #dd4b39 !important;
+}
+
+.text-warning {
+  color: #f39c12 !important;
+}
+
+.text-info {
+  color: #00c0ef !important;
+}
+
+.text-purple {
+  color: #6f42c1 !important;
+}
+
+.text-body {
+  color: #212529 !important;
+}
+
+.text-selected {
+  color: #cc181e !important;
+}
+
+.text-grey {
+  color: grey !important;
+}
+
+.text-muted {
+  color: #aab8c2 !important;
+}
+
+/*# sourceMappingURL=style.css.map */
